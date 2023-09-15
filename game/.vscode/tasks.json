@@ -1,0 +1,160 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"command": "dotnet",
+			"type": "process",
+			"args": ["build"],
+			"problemMatcher": "$msCompile",
+			"presentation": {
+				"echo": true,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"label": "build-godot-without-glue",
+			"group": "build",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/../godot"
+			},
+			"command": "scons",
+			"args": [
+				"-j 10",
+				"target=editor",
+				"module_mono_enabled=yes",
+				"dev_build=yes"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "generate-godot-glue",
+			"group": "build",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/../godot"
+			},
+			"command": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.console.exe",
+			"args": [
+				"--headless",
+				"--generate-mono-glue",
+				"./modules/mono/glue"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build-godot-with-glue",
+			"group": "build",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/../godot"
+			},
+			"command": "scons",
+			"args": [
+				"-j 10",
+				"target=editor",
+				"module_mono_enabled=yes",
+				"dev_build=yes"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "create-godot-pkg-source",
+			"group": "build",
+			"type": "shell",
+			"command": "dotnet",
+			"options": {
+				"cwd": "${workspaceFolder}/../godot"
+			},
+			"args": [
+				"nuget",
+				"add",
+				"source",
+				"F:\\GodotLocal",
+				"--name",
+				"GodotLocal"
+			]
+		},
+		{
+			"label": "build-godot-mono-assemblies",
+			"group": "build",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/../godot"
+			},
+			"command": "python",
+			"args": [
+				"./modules/mono/build_scripts/build_assemblies.py",
+				"--godot-output-dir=./bin",
+				"--godot-platform=windows",
+				"--push-nupkgs-local=F:\\GodotLocal"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build-godot-export-template",
+			"group": "build",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/../godot"
+			},
+			"command": "scons",
+			"args": [
+				"-j 10",
+				"target=template_debug",
+				"module_mono_enabled=yes"
+			]
+		},
+		{
+			"label": "build-godot-export-template-release",
+			"group": "build",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/../godot"
+			},
+			"command": "scons",
+			"args": [
+				"-j 10",
+				"target=template_release",
+				"module_mono_enabled=yes"
+			]
+		},
+		{
+			"label": "build-godot",
+			"dependsOn": [
+				"build-godot-without-glue",
+				"generate-godot-glue",
+				"build-godot-with-glue",
+				"build-godot-mono-assemblies"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "launch-editor",
+			"type": "shell",
+			"command": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.console.exe",
+			"args": ["--path", "${workspaceFolder}", "--editor"],
+			"problemMatcher": []
+		},
+		{
+			"label": "build-game",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"command": "dotnet",
+			"args": ["build"]
+		},
+		{
+			"label": "build-all",
+			"dependsOn": ["build-godot", "build-game"],
+			"dependsOrder": "sequence"
+		}
+	]
+}

@@ -1,0 +1,133 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Play",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.exe",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"stopAtEntry": false
+		},
+		// {
+		// 	"name": "Debug Game",
+		// 	"type": "cppvsdbg",
+		// 	"request": "launch",
+		// 	"preLaunchTask": "build",
+		// 	"program": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.console.exe",
+		// 	"args": ["--", "--host=\"Debug Save\""],
+		// 	"cwd": "${workspaceFolder}",
+		// 	"stopAtEntry": false,
+		// 	"visualizerFile": "${workspaceFolder}/../godot/platform/windows/godot.natvis"
+		// 	// "symbolOptions": {
+		// 	// 	"searchPaths": ["${workspaceFolder}/../godot/bin"],
+		// 	// 	"searchMicrosoftSymbolServer": true,
+		// 	// 	"searchNuGetOrgSymbolServer": true
+		// 	// },
+		// 	// "logging": {
+		// 	// 	"moduleLoad": false
+		// 	// }
+		// },
+		{
+			"name": "Debug Editor - no build",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.exe",
+			// Change the arguments below for the project you want to test with.
+			// To run the project instead of editing it, remove the "--editor" argument.
+			"args": ["--editor", "--path", "${workspaceFolder}"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}/../godot",
+			"environment": [],
+			"console": "internalConsole",
+			"visualizerFile": "${workspaceFolder}/../godot/platform/windows/godot.natvis",
+			"logging": {
+				"moduleLoad": false
+			}
+		},
+		{
+			"name": "Debug Editor",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.exe",
+			// Change the arguments below for the project you want to test with.
+			// To run the project instead of editing it, remove the "--editor" argument.
+			"args": ["--editor", "--path", "${workspaceFolder"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}/../godot",
+			"environment": [],
+			"console": "internalConsole",
+			"visualizerFile": "${workspaceFolder}/../godot/platform/windows/godot.natvis",
+			"preLaunchTask": "build-godot",
+			"logging": {
+				"moduleLoad": false
+			}
+		},
+		{
+			"name": "Debug Game - build engine",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.exe",
+			// Change the arguments below for the project you want to test with.
+			// To run the project instead of editing it, remove the "--editor" argument.
+			"args": ["--path", "${workspaceFolder}"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}/../godot",
+			"environment": [],
+			"console": "internalConsole",
+			"visualizerFile": "${workspaceFolder}/../godot/platform/windows/godot.natvis",
+			"preLaunchTask": "build-godot",
+			"logging": {
+				"moduleLoad": false
+			}
+		},
+		{
+			"name": "Debug Game - build all",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.exe",
+			// Change the arguments below for the project you want to test with.
+			// To run the project instead of editing it, remove the "--editor" argument.
+			"args": ["--path", "${workspaceFolder}}"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}/../godot",
+			"environment": [],
+			"console": "internalConsole",
+			"visualizerFile": "${workspaceFolder}/../godot/platform/windows/godot.natvis",
+			"preLaunchTask": "build-all",
+			"logging": {
+				"moduleLoad": false
+			}
+		},
+		{
+			"name": "Debug Game - build game",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/../godot/bin/godot.windows.editor.dev.x86_64.mono.exe",
+			// Change the arguments below for the project you want to test with.
+			// To run the project instead of editing it, remove the "--editor" argument.
+			"args": ["--path", "${workspaceFolder}"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}/../godot",
+			"environment": [],
+			"console": "internalConsole",
+			"visualizerFile": "${workspaceFolder}/../godot/platform/windows/godot.natvis",
+			"preLaunchTask": "build-game",
+			"logging": {
+				"moduleLoad": false
+			}
+		}
+		// {
+		// 	"name": "Attach",
+		// 	"type": "godot-mono",
+		// 	"request": "attach",
+		// 	"address": "localhost",
+		// 	"port": 23685
+		// }
+	]
+}
